@@ -605,8 +605,7 @@
                         <div class="profile-border"></div>
                         <div class="profile-image">
                             <div class="profile-inner" id="profileAvatar">
-                                <!-- metti qui il tuo avatar: <img src="avatar.png"> -->
-                                <i class="fa-solid fa-user" style="font-size:3rem;color:#444;"></i>
+                                <img src="avatar.jpg" alt="tonynoh" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fa-solid fa-user\' style=\'font-size:3rem;color:#444;\'></i>'">
                             </div>
                         </div>
                     </div>
@@ -804,7 +803,7 @@
         const bgStartAudio = document.getElementById('bg-start-audio');
         const appContainer = document.querySelector('.app-container');
 
-        bgMusic.volume = 0.075;
+        bgMusic.volume = 0.225;
 
         function playBgAudio() {
             bgStartAudio.style.pointerEvents = 'none';
