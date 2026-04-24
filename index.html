@@ -636,6 +636,8 @@
 </head>
 
 <body>
+    <canvas id="snow-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
     <div id="bg-start-audio">
         <h1>tonynoh</h1>
         <p>click anywhere</p>
@@ -704,14 +706,10 @@
                         <div class="bio-tab"><strong>Place:</strong> Rome, Italy</div>
                         <div class="bio-tab"><strong>Language:</strong> Italian</div>
                     </div>
-
-                    <!-- Current Staff section -->
                     <div class="bio-staff-section">
                         <h3 class="bio-staff-title"><i class="fa-solid fa-user-clock"></i> CURRENT STAFF</h3>
                         <div class="staff-grid" id="currentlyGrid"></div>
                     </div>
-
-                    <!-- LINKS section -->
                     <div class="bio-links-section">
                         <h3 class="bio-staff-title"><i class="fa-solid fa-link"></i> LINKS</h3>
                         <div class="bio-links-grid" id="linksGrid"></div>
@@ -724,7 +722,6 @@
                     <div class="section-icon"><i class="fa-solid fa-briefcase"></i></div>
                     <span>Staff Experience</span>
                 </div>
-                <!-- le staff exp vengono aggiunte via JS dal CONFIG -->
             </section>
         </div>
     </div>
@@ -767,19 +764,18 @@
                     role: "PVP TIERIST",
                     color: "#ffffff",
                     tiers: [
-                        { name: "UHC Tierlist", link: "https://discord.gg/wh54JQ9k" },
-                        { name: "Axe Tierlist", link: "https://discord.gg/xy2GdVESCj" },
-                        { name: "Crystal Tierlist", link: "https://discord.gg/2Ra6FqTp7" },
-                        { name: "Potion Tierlist", link: "https://discord.gg/SWTXgtvZQh" },
-                        { name: "Sword Tierlist", link: "https://discord.gg/tiers" },
-                        { name: "SMP Tierlist", link: "https://discord.gg/sbtuPJzcxW" },
-                        { name: "Nethpot Tierlist", link: "https://discord.gg/cJshFSxey4" }
+                        { name: "UHC Tierlist",     discord: "https://discord.gg/wh54JQ9k",      imgur: "https://imgur.com/a/r7pqYgn" },
+                        { name: "Axe Tierlist",     discord: "https://discord.gg/xy2GdVESCj",    imgur: "https://imgur.com/a/0f5cMoj" },
+                        { name: "Crystal Tierlist", discord: "https://discord.gg/2Ra6FqTp7",     imgur: "https://imgur.com/a/AT2hfxf" },
+                        { name: "Potion Tierlist",  discord: "https://discord.gg/SWTXgtvZQh",    imgur: "https://imgur.com/a/F7GZK7Z" },
+                        { name: "Sword Tierlist",   discord: "https://discord.gg/tiers",          imgur: "https://imgur.com/a/JDsLqrN" },
+                        { name: "SMP Tierlist",     discord: "https://discord.gg/sbtuPJzcxW",    imgur: "https://imgur.com/a/QAte1CP" },
+                        { name: "Nethpot Tierlist", discord: "https://discord.gg/cJshFSxey4",    imgur: "https://imgur.com/a/ymP3UCm" }
                     ]
                 }
             ],
             staffExperience: [
-                // Verranno aggiunti quando mandi i link Imgur
-                // Esempio: { serverName: "NomeServer", role: "RUOLO", year: "2024", color: "#ffffff", imgurLink: "https://imgur.com/..." }
+
             ]
         };
 
@@ -831,38 +827,79 @@
             }
 
             CONFIG.currently.forEach(item => {
-                const wrapper = document.createElement('div');
-                wrapper.style.cssText = 'position:relative;';
-
-                let tiersHtml = '';
-                if (item.tiers && item.tiers.length) {
-                    tiersHtml = `
-                    <div class="tier-dropdown">
-                        ${item.tiers.map(t => `
-                            <a href="${t.link}" target="_blank" class="tier-dropdown-item">
-                                <span style="color:var(--text-tertiary);margin-right:8px;">→</span>${t.name}
-                            </a>`).join('')}
-                    </div>`;
+                if (!item.tiers) {
+                    createCard(grid, item, item.discordLink || item.imgurLink);
+                    return;
                 }
 
-                wrapper.innerHTML = `
-                    <div class="server-card network-card">
-                        <div class="server-info">
-                            <h4><i class="fa-solid fa-shield-halved" style="margin-right:8px;font-size:0.9rem;"></i>${item.serverName}</h4>
-                            <div class="server-role">${item.role}</div>
-                        </div>
-                        <span class="network-arrow">▾</span>
-                        ${tiersHtml}
-                    </div>`;
+                const card = document.createElement('div');
+                card.className = 'server-card';
+                card.style.cssText = 'height:auto;padding:0;cursor:default;text-align:left;align-items:stretch;overflow:visible;';
+
+                const header = document.createElement('div');
+                header.style.cssText = 'padding:1rem 1.25rem 0.75rem;border-bottom:1px solid var(--border-primary);display:flex;align-items:center;gap:10px;';
+                header.innerHTML = `
+                    <i class="fa-solid fa-shield-halved" style="color:#888;font-size:0.85rem;"></i>
+                    <span style="font-weight:700;font-size:0.95rem;color:var(--text-primary);">${item.serverName}</span>
+                    <div class="server-role" style="margin-top:0;margin-left:auto;">${item.role}</div>`;
+                card.appendChild(header);
 
                 if (item.color) {
-                    const roleEl = wrapper.querySelector('.server-role');
+                    const roleEl = header.querySelector('.server-role');
                     roleEl.style.background = hexToRgba(item.color, 0.1);
                     roleEl.style.borderColor = hexToRgba(item.color, 0.2);
                     roleEl.style.color = item.color;
                 }
 
-                grid.appendChild(wrapper);
+                item.tiers.forEach(t => {
+                    const row = document.createElement('div');
+                    row.style.cssText = `
+                        display:flex;align-items:center;
+                        padding:0.55rem 1.25rem;
+                        border-bottom:1px solid var(--border-primary);
+                        gap:12px;
+                        transition:background 0.2s ease, padding-left 0.2s ease;
+                    `;
+                    row.onmouseenter = () => { row.style.background = 'rgba(88,101,242,0.04)'; row.style.paddingLeft = '1.5rem'; };
+                    row.onmouseleave = () => { row.style.background = 'transparent'; row.style.paddingLeft = '1.25rem'; };
+
+                    row.innerHTML = `
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#5865F2" style="flex-shrink:0;opacity:0.75;" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.01.043.027.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        <span style="flex:1;font-size:13px;color:var(--text-secondary);font-weight:500;letter-spacing:0.01em;">${t.name}</span>
+                        <a href="${t.discord}" target="_blank" title="Join Discord" style="
+                            display:inline-flex;align-items:center;gap:6px;
+                            padding:5px 11px;border-radius:8px;
+                            background:rgba(88,101,242,0.13);
+                            border:1px solid rgba(88,101,242,0.28);
+                            color:#8b97f5;text-decoration:none;
+                            font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+                            transition:background 0.18s ease,border-color 0.18s ease,color 0.18s ease,transform 0.18s ease;
+                            flex-shrink:0;white-space:nowrap;"
+                            onmouseenter="this.style.background='rgba(88,101,242,0.26)';this.style.borderColor='rgba(88,101,242,0.55)';this.style.color='#fff';this.style.transform='translateY(-1px)'"
+                            onmouseleave="this.style.background='rgba(88,101,242,0.13)';this.style.borderColor='rgba(88,101,242,0.28)';this.style.color='#8b97f5';this.style.transform='translateY(0)'">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.01.043.027.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                            Join
+                        </a>
+                        <a href="${t.imgur}" target="_blank" title="View Proof" style="
+                            display:inline-flex;align-items:center;gap:5px;
+                            padding:5px 10px;border-radius:8px;
+                            background:rgba(255,255,255,0.04);
+                            border:1px solid rgba(255,255,255,0.09);
+                            color:#555;text-decoration:none;
+                            font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+                            transition:background 0.18s ease,border-color 0.18s ease,color 0.18s ease,transform 0.18s ease;
+                            flex-shrink:0;white-space:nowrap;"
+                            onmouseenter="this.style.background='rgba(255,255,255,0.1)';this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='#bbb';this.style.transform='translateY(-1px)'"
+                            onmouseleave="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(255,255,255,0.09)';this.style.color='#555';this.style.transform='translateY(0)'">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            Proof
+                        </a>`;
+                    card.appendChild(row);
+                });
+
+                card.lastChild.style.borderBottom = 'none';
+
+                grid.appendChild(card);
             });
         }
 
@@ -874,7 +911,6 @@
                 placeholder.innerHTML = '<i class="fa-solid fa-clock" style="font-size:2rem;margin-bottom:1rem;display:block;"></i>Staff experience coming soon...';
                 section.appendChild(placeholder);
             } else {
-                // Raggruppa per categoria se necessario
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'staff-category';
                 const grid = document.createElement('div');
@@ -915,7 +951,6 @@
             document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
         }
 
-        // Audio
         const bgMusic = document.getElementById('bg-music');
         const muteBtn = document.getElementById('mute-btn');
         const bgStartAudio = document.getElementById('bg-start-audio');
@@ -1045,6 +1080,63 @@
         }
 
         ghostCursor({});
+    </script>
+
+    <script>
+        (function() {
+            const canvas = document.getElementById('snow-canvas');
+            const ctx = canvas.getContext('2d');
+            let W = window.innerWidth, H = window.innerHeight;
+            canvas.width = W; canvas.height = H;
+
+            window.addEventListener('resize', () => {
+                W = window.innerWidth; H = window.innerHeight;
+                canvas.width = W; canvas.height = H;
+            });
+
+            const FLAKE_COUNT = 80;
+            const flakes = [];
+
+            for (let i = 0; i < FLAKE_COUNT; i++) {
+                flakes.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: Math.random() * 3.5 + 0.8,
+                    speed: Math.random() * 0.8 + 0.3,
+                    wind: Math.random() * 0.4 - 0.2,
+                    opacity: Math.random() * 0.55 + 0.15,
+                    wobble: Math.random() * Math.PI * 2,
+                    wobbleSpeed: Math.random() * 0.012 + 0.004
+                });
+            }
+
+            function drawFlake(f) {
+                ctx.save();
+                ctx.globalAlpha = f.opacity;
+                ctx.beginPath();
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = 'rgba(255,255,255,0.6)';
+                ctx.shadowBlur = f.r * 2;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, W, H);
+                for (const f of flakes) {
+                    f.wobble += f.wobbleSpeed;
+                    f.x += f.wind + Math.sin(f.wobble) * 0.3;
+                    f.y += f.speed;
+                    if (f.y > H + 6) { f.y = -6; f.x = Math.random() * W; }
+                    if (f.x > W + 6) f.x = -6;
+                    if (f.x < -6) f.x = W + 6;
+                    drawFlake(f);
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
     </script>
 </body>
 </html>
