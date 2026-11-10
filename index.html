@@ -479,7 +479,6 @@ body.playing .o2{animation-delay:-9s}
 .tn-mark{width:40px;height:40px}
 .tn-mark img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:1.5px solid rgba(190,145,255,.6);filter:none;box-shadow:0 0 18px rgba(167,110,255,.45)}
 .tn-mark b{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2))}
-.tn-logo:after{display:none}
 .tn-logo:hover .tn-mark img{transform:scale(1.08) rotate(-4deg)}
 
 .player{width:236px;padding:10px 12px 16px;border-radius:22px;border:1px solid rgba(255,255,255,.09);
@@ -529,6 +528,64 @@ body.playing .o2{animation-delay:-9s}
 .track.active b{color:#7dffb0}
 @media(hover:none){.player{width:min(262px,calc(100vw - 24px))}}
 @media(max-width:420px){.eq{display:none}}
+
+/* ===== MY PROJECTS ===== */
+.proj{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.pc{position:relative;display:flex;flex-direction:column;gap:12px;text-align:left;padding:22px;border-radius:18px;background:linear-gradient(145deg,rgba(26,17,44,.92),rgba(10,7,18,.92));border:1px solid var(--line);color:var(--txt);cursor:pointer;font:inherit;overflow:hidden;transition:transform .3s var(--out),border-color .3s,box-shadow .3s}
+.pc:before{content:"";position:absolute;inset:0;background:radial-gradient(260px 120px at var(--mx,50%) var(--my,0%),rgba(167,110,255,.16),transparent 70%);opacity:0;transition:opacity .3s}
+.pc:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 18px 40px -18px rgba(109,51,255,.55)}
+.pc:hover:before{opacity:1}
+.pc>*{position:relative}
+.pc .ph{display:flex;align-items:center;justify-content:space-between;font:11px var(--mono);color:var(--dim);letter-spacing:.15em}
+.pc .ph svg{width:18px;height:18px;fill:currentColor;color:var(--bright)}
+.pc h3{font:600 18px 'Space Grotesk';color:var(--bright);letter-spacing:-.01em}
+.pc p{font-size:13.5px;line-height:1.55;color:var(--txt);flex:1}
+.pc .tg{display:flex;flex-wrap:wrap;gap:6px}
+.pc .tg i{font:normal 10.5px var(--mono);padding:4px 10px;border-radius:99px;background:rgba(167,110,255,.09);border:1px solid var(--line);color:#cdb4ff}
+.pc .go{font:11px var(--mono);color:var(--p);letter-spacing:.12em;transition:letter-spacing .3s}
+.pc:hover .go{letter-spacing:.2em}
+.pc.wide{grid-column:1/-1;cursor:default}
+.pc.wide:hover{transform:none}
+.sb{display:grid;gap:8px;margin-top:2px}
+.sr{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;background:rgba(167,110,255,.06);border:1px solid var(--line)}
+.sr>div{flex:1;min-width:0}
+.sr b{display:block;font:600 13px var(--mono);color:var(--bright);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr span{font-size:12.5px;color:var(--dim)}
+.sr button,.sr a{font:11px var(--mono);padding:7px 12px;border-radius:99px;border:1px solid var(--line2);background:none;color:var(--bright);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.sr button:hover,.sr a:hover{background:var(--bright);color:#0a0612}
+@media(max-width:560px){.sr{flex-wrap:wrap}.sr>div{flex-basis:100%}}
+.gm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(5,3,10,.72);backdrop-filter:blur(8px);animation:gmIn .25s ease}
+.gm.out{opacity:0;transition:opacity .22s}
+.gp{width:100%;max-width:860px;height:min(80vh,640px);display:flex;flex-direction:column;border-radius:20px;background:#0d0817;border:1px solid var(--line2);box-shadow:0 30px 90px -20px #000;overflow:hidden;animation:gpIn .35s var(--out)}
+@keyframes gmIn{from{opacity:0}}
+@keyframes gpIn{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.gh{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.gh>div{flex:1;min-width:0}
+.gh b{display:block;font:500 14px var(--mono);color:var(--bright);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gh span{font-size:12px;color:var(--dim)}
+.gh button{width:32px;height:32px;border-radius:9px;border:0;background:none;color:var(--dim);font-size:18px;cursor:pointer;transition:transform .3s,color .2s}
+.gh button:hover{color:var(--bright);transform:rotate(90deg)}
+.gt{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--line)}
+.gt button{font:12px var(--mono);padding:9px 14px;border:0;border-bottom:2px solid transparent;background:none;color:var(--dim);cursor:pointer}
+.gt button.on{color:var(--bright);border-color:var(--p)}
+.gb{flex:1;min-height:0;overflow:auto;padding:22px 24px;font-size:14px;line-height:1.65}
+.gb h1,.gb h2,.gb h3{color:var(--bright);font-family:'Space Grotesk';margin:1.3em 0 .5em;letter-spacing:-.01em;text-transform:none;display:block;font-size:1.15em;min-height:0}
+.gb h1{font-size:1.45em;margin-top:0}
+.gb p{margin:.6em 0}.gb ul{margin:.5em 0 .5em 1.2em}.gb li{margin:.25em 0}
+.gb code{font:12.5px var(--mono);background:rgba(167,110,255,.12);padding:2px 6px;border-radius:6px;color:#d9c6ff}
+.gb pre{margin:.8em 0;padding:14px;border-radius:12px;background:#07040e;border:1px solid var(--line);overflow:auto}
+.gb pre code{background:none;padding:0;color:var(--txt)}
+.gb a{color:var(--p);text-decoration:underline}
+.gb hr{border:0;border-top:1px solid var(--line);margin:1.4em 0}
+.gf{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;font:13px var(--mono);color:var(--txt);cursor:pointer}
+.gf:hover{background:rgba(167,110,255,.08);color:var(--bright)}
+.gf em{margin-left:auto;font-style:normal;color:var(--dim);font-size:11px}
+.gr{padding:14px 16px;margin-bottom:10px;border-radius:12px;border:1px solid var(--line);background:rgba(167,110,255,.05)}
+.gr b{color:var(--bright);font:600 13px var(--mono)}.gr small{display:block;color:var(--dim);font:11px var(--mono);margin:3px 0 8px}
+.gm .msg{font:12.5px var(--mono);color:var(--dim);padding:18px 0}
+.gx{display:flex;padding:12px 20px;border-top:1px solid var(--line)}
+.gx a{margin-left:auto;font:12px var(--mono);padding:9px 16px;border-radius:99px;border:1px solid var(--line2);color:var(--bright);transition:background .2s,color .2s}
+.gx a:hover{background:var(--bright);color:#0a0612}
 </style>
 </head>
 <body>
@@ -545,7 +602,7 @@ body.playing .o2{animation-delay:-9s}
 </div>
 
 <header id="hd">
-  <a class="logo brandmark tn-logo" href="#top" aria-label="tonynoh — back to top"><span class="tn-mark"><img src="hero.jpg" alt="Tonynoh" width="40" height="40" onerror="this.replaceWith(Object.assign(document.createElement('b'),{textContent:'TN'}))"></span></a>
+  <a class="logo brandmark tn-logo" href="#top" aria-label="tonynoh is the way — back to top"><span class="tn-mark"><img src="hero.jpg" alt="Tonynoh" width="40" height="40" onerror="this.replaceWith(Object.assign(document.createElement('b'),{textContent:'TN'}))"></span><span class="tn-text">tonynoh <em>is the way</em></span></a>
   <div class="pill"><i class="ind" id="ind"></i>
     <a href="#about" data-s="about"><b>01</b>About</a><a href="#tools" data-s="tools"><b>02</b><span class="lg">Tools &amp; Knowledge</span><span class="sh">Tools</span></a><a href="#staff" data-s="staff"><b>03</b>Staff</a><a href="#socials" data-s="socials"><b>04</b>My Socials</a>
   </div>
@@ -605,7 +662,7 @@ body.playing .o2{animation-delay:-9s}
   <section id="tools" class="reveal">
     <h2>Tools &amp; Knowledge</h2>
     <div class="sub" style="margin-top:0">Knowledge</div><div class="grid know" id="know-grid"></div>
-    <div class="sub">Toolkit</div><div class="rows tl" id="tools-grid"></div>
+    <div class="sub">My Projects</div><div class="proj" id="proj-grid"></div>
   </section>
   <section id="staff"><h2 id="staff-title"></h2>
     <input class="q" id="q" placeholder="search communities…" autocomplete="off" spellcheck="false" aria-label="Search staff experience">
@@ -766,7 +823,77 @@ $('idc').innerHTML=`<div class="idt"><span>ID</span><span>${CFG.city.toUpperCase
 
 /* tools + knowledge */
 $('know-grid').innerHTML=CFG.knowledge.map(([k,h,p])=>`<div class="card"><span class="k">${k}</span><h3>${h}</h3><p>${p}</p></div>`).join('');
-$('tools-grid').innerHTML=CFG.tools.map(([k,h,p])=>`<div class="row"><span class="rk">${k}</span><span class="rn">${h}</span><span class="rr">${p}</span></div>`).join('');
+
+/* my projects */
+(()=>{
+const U='MeowTonynoh',GH='<svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>';
+const P=[
+['MeowClientFucker','Cheat client detection through Javaw RAM scanning and DNS cache analysis, plus generic module detection that works independently from the client.',['RAM scan','DNS cache','Javaw']],
+['MeowDoomsdayFucker','Detects the Doomsday client through RAM memory scanning and Windows system file analysis, with an integrated JAR parser.',['RAM scan','System files','JAR parser']],
+['MeowNovowareFucker','Detects the Novoware client through memory scanning and NTFS journal analysis.',['RAM scan','NTFS journal']],
+['MeowModAnalyzer','Scans a mods folder, hashes every JAR and checks it against Modrinth to flag potential cheat clients.',['PowerShell','SHA1','Modrinth API']],
+['MeowResolver','Windows forensic tool that finds and removes bypass techniques and anti-forensic tampering in registry, event logs and file system.',['Registry','Event logs','Admin']],
+['MeowImportsChecker','Scans files for client signatures, strings, PE imports, obfuscation and injection artifacts, with VirusTotal lookup. 100% local, read-only.',['PE imports','Strings','VirusTotal']],
+['ShadowClicker','Lightweight clicker built on native Windows input APIs, made to run fileless for testing.',['SendInput','Fileless'] ]
+];
+const SUB=[
+['JVM-Inspector.ps1','Analyzes java/javaw launch arguments and JVM abuse.'],
+['PrefetchParametersCheck.ps1','Checks the Prefetch parameters on the system.']
+];
+const e=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const g=$('proj-grid');
+g.innerHTML=P.map(([n,d,t],i)=>`<button class="pc" data-n="${n}"><div class="ph"><span>${String(i+1).padStart(2,'0')}</span>${GH}</div><h3>${n}</h3><p>${d}</p><div class="tg">${t.map(x=>`<i>${x}</i>`).join('')}</div><span class="go">README · FILES · RELEASES →</span></button>`).join('')
++`<div class="pc wide"><div class="ph"><span>${String(P.length+1).padStart(2,'0')} · COLLECTION</span>${GH}</div><h3>Tonynoh-PS1</h3><p>A collection of PowerShell scripts for screenshare checks, runnable straight from PowerShell.</p><div class="sb">${SUB.map(([f,d])=>`<div class="sr"><div><b>${f}</b><span>${d}</span></div><button data-cmd="${f}">Copy command</button><a href="https://github.com/${U}/Tonynoh-PS1/blob/main/${f}" target="_blank" rel="noopener">View</a></div>`).join('')}</div><div><a class="go" href="https://github.com/${U}/Tonynoh-PS1" target="_blank" rel="noopener">OPEN ON GITHUB →</a></div></div>`;
+g.addEventListener('pointermove',ev=>{const c=ev.target.closest('.pc');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',ev.clientX-r.left+'px');c.style.setProperty('--my',ev.clientY-r.top+'px')}});
+g.addEventListener('click',ev=>{
+ const b=ev.target.closest('[data-cmd]');
+ if(b){const f=b.dataset.cmd,cmd=`powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-RestMethod 'https://raw.githubusercontent.com/${U}/Tonynoh-PS1/main/${f}')"`;
+  (navigator.clipboard?navigator.clipboard.writeText(cmd):Promise.reject()).then(()=>{b.textContent='Copied ✓'},()=>{b.textContent='Copy failed'});setTimeout(()=>b.textContent='Copy command',1600);return}
+ const c=ev.target.closest('.pc[data-n]');if(c)open(c.dataset.n);
+});
+const md=src=>{
+ const code=[];let t=e(src).replace(/```[^\n]*\n([\s\S]*?)```/g,(_,c)=>'\u0000'+(code.push(c)-1)+'\u0000');
+ const inl=x=>x.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+ let out='',list=false;
+ for(const l of t.split('\n')){
+  const li=l.match(/^\s*[-*]\s+(.*)/);
+  if(li){out+=(list?'':'<ul>')+'<li>'+inl(li[1])+'</li>';list=true;continue}
+  if(list){out+='</ul>';list=false}
+  const h=l.match(/^(#{1,3})\s+(.*)/);
+  if(h)out+=`<h${h[1].length}>${inl(h[2])}</h${h[1].length}>`;
+  else if(/^-{3,}\s*$/.test(l))out+='<hr>';
+  else if(/^\u0000\d+\u0000$/.test(l.trim()))out+=l.trim();
+  else if(l.trim())out+='<p>'+inl(l)+'</p>';
+ }
+ if(list)out+='</ul>';
+ return out.replace(/\u0000(\d+)\u0000/g,(_,i)=>'<pre><code>'+code[i]+'</code></pre>');
+};
+const api=u=>fetch('https://api.github.com/repos/'+U+'/'+u).then(r=>{if(r.status===403)throw'GitHub API rate limit reached, try again in a few minutes.';if(!r.ok)throw'Could not load data from GitHub.';return r.json()});
+function open(n){
+ const d=P.find(p=>p[0]===n),m=document.createElement('div');m.className='gm';
+ m.innerHTML=`<div class="gp"><div class="gh"><div><b>${U}/${n}</b><span>${d[1]}</span></div><button aria-label="Close">✕</button></div><div class="gt"><button data-t="readme" class="on">README</button><button data-t="files">Files</button><button data-t="rel">Releases</button></div><div class="gb"><div class="msg">Loading…</div></div><div class="gx"><a href="https://github.com/${U}/${n}" target="_blank" rel="noopener">Open on GitHub ↗</a></div></div>`;
+ document.body.appendChild(m);document.body.style.overflow='hidden';
+ const body=m.querySelector('.gb'),cache={};let path='';
+ const close=()=>{m.classList.add('out');document.body.style.overflow='';document.removeEventListener('keydown',key);setTimeout(()=>m.remove(),220)},key=ev=>ev.key==='Escape'&&close();
+ document.addEventListener('keydown',key);
+ m.addEventListener('click',ev=>{if(ev.target===m||ev.target.closest('.gh button'))close()});
+ const err=x=>body.innerHTML=`<div class="msg">${e(x)}</div>`;
+ const tabs={
+  async readme(){if(cache.r===undefined){let r;for(const b of['main','master']){r=await fetch(`https://raw.githubusercontent.com/${U}/${n}/${b}/README.md`);if(r.ok)break}cache.r=r.ok?md(await r.text()):'<div class="msg">No README found.</div>'}body.innerHTML=cache.r},
+  async files(){const j=await api(n+'/contents'+(path?'/'+path:''));j.sort((a,b)=>(a.type==='dir'?0:1)-(b.type==='dir'?0:1)||a.name.localeCompare(b.name));
+   body.innerHTML=(path?`<div class="gf" data-up>↰ ..</div>`:'')+j.map(f=>`<div class="gf" data-p="${e(f.path)}" data-d="${f.type==='dir'}" data-u="${e(f.html_url)}">${f.type==='dir'?'📁':'📄'} ${e(f.name)}<em>${f.type==='dir'?'':Math.max(1,Math.round(f.size/1024))+' KB'}</em></div>`).join('')},
+  async rel(){const j=await api(n+'/releases');body.innerHTML=j.length?j.slice(0,5).map(r=>`<div class="gr"><b>${e(r.name||r.tag_name)}</b><small>${e(r.tag_name)} · ${new Date(r.published_at||r.created_at).toLocaleDateString()}</small>${(r.assets||[]).map(a=>`<a href="${e(a.browser_download_url)}" target="_blank" rel="noopener" style="color:var(--p);font:12px var(--mono);display:block">⬇ ${e(a.name)}</a>`).join('')||'<span class="msg">No assets.</span>'}</div>`).join(''):'<div class="msg">No published releases yet.</div>'}
+ };
+ let cur='readme';
+ const go=t=>{cur=t;m.querySelectorAll('.gt button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));body.innerHTML='<div class="msg">Loading…</div>';tabs[t]().catch(x=>err(typeof x==='string'?x:'Could not load data from GitHub.'))};
+ m.querySelector('.gt').addEventListener('click',ev=>{const b=ev.target.closest('button');if(b){path='';go(b.dataset.t)}});
+ body.addEventListener('click',ev=>{const f=ev.target.closest('.gf');if(!f)return;
+  if('up' in f.dataset){path=path.split('/').slice(0,-1).join('/');go('files')}
+  else if(f.dataset.d==='true'){path=f.dataset.p;go('files')}
+  else window.open(f.dataset.u,'_blank','noopener')});
+ go('readme');
+}
+})();
 
 /* staff */
 $('staff-title').textContent=`Staff · ${staff.length+1} communities`;
@@ -963,8 +1090,10 @@ function finish(){
  const tracks=[
   {title:'Aint My Style',artist:'whereami',file:'aint my style - whereami.mp3'},
   {title:'InWAVES',artist:'Vat6ré',file:'InWAVES - Vat6ré.mp3'},
-  {title:'Sex Sells',artist:'5EB',file:'Sex Sells - 5EB.mp3'}
- ];
+  {title:'16',artist:'starkura, PureSnow',file:'16 - starkura PureSnow.mp3'},
+  {title:'Already (Bass Boosted)',artist:'Kodak Black',file:'Already - Kodak Black.mp3'},
+  {title:'Фруктовый 1.0',artist:'ЭЛЕВЕН ЭЙТ',file:'Fruktovyi 1.0 - Eleven Eight.mp3'}
+];
  // URL-safe candidates (spaces and accents encoded; both Unicode forms of "é" are tried)
  const urlsOf=f=>[...new Set([f.normalize('NFC'),f.normalize('NFD')])].map(n=>encodeURIComponent(n).replace(/%2F/g,'/'));
  let current=0,cand=0,wantPlay=false,userPaused=false,dragging=false,raf=0,lastVol=.3;
