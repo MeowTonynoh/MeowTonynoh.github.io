@@ -104,7 +104,11 @@ main.on .hb{opacity:1;transform:none}
 /* ============ STATEMENT + STATS ============ */
 .stm{padding:110px 0 80px;border-top:1px solid var(--line)}
 #stm{font:600 clamp(1.6rem,3.8vw,3.2rem)/1.15 'Space Grotesk';letter-spacing:-.035em;max-width:1000px}
-#stm .w{color:rgba(244,239,255,var(--o,.16))}
+#stm{color:var(--bright)}
+#stm .wm{display:inline-block;overflow:hidden;vertical-align:top;padding:0 0 .14em;margin:0 .26em -.14em 0}
+#stm .wi{display:inline-block;transform:translateY(118%);transition:transform 1.1s cubic-bezier(.16,1,.3,1) calc(var(--i)*42ms)}
+#stm.in .wi{transform:none}
+#stm .hl .wi{background:linear-gradient(100deg,#e4d3ff,#a76eff 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(28,18,48,.75),rgba(12,8,22,.75));overflow:hidden}
 .stat{padding:34px 28px;border-left:1px solid var(--line)}.stat:first-child{border:0}
 .stat b{display:block;font:700 clamp(2.4rem,5vw,3.8rem)/1 'Space Grotesk';letter-spacing:-.05em;color:var(--bright);font-variant-numeric:tabular-nums}
@@ -454,6 +458,22 @@ body.on .tn-text{animation:tnIn .8s var(--out) .15s both,tnShine 4.5s linear 1s 
 body.playing .orb{animation:float 18s ease-in-out infinite}
 body.playing .o2{animation-delay:-9s}
 @media(max-width:420px){.pl-meta small{display:none}}
+
+/* ===== PLAYER v3: piccolo, discreto, si apre in hover ===== */
+.player{width:204px;padding:8px 9px 10px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05)}
+.player:hover,.player:focus-within{width:min(318px,calc(100vw - 24px))}
+.player.expanded{width:min(340px,calc(100vw - 24px))}
+.pl-art{width:34px;height:34px;border-radius:10px;background:radial-gradient(circle at 30% 25%,#2a1f45,#0c0816 78%)}
+.pl-art .sp{display:grid;color:#1ed760}
+.pl-art .sp svg{width:21px;height:21px;filter:drop-shadow(0 0 7px rgba(30,215,96,.5))}
+.eq b{background:#1ed760;box-shadow:0 0 8px rgba(30,215,96,.7)}
+@keyframes plGlow{from{box-shadow:0 0 6px rgba(30,215,96,.15)}to{box-shadow:0 0 16px rgba(30,215,96,.42)}}
+.pl-skip,.pl-volwrap{opacity:0;pointer-events:none;transition:width .5s var(--ease),opacity .3s,margin .5s var(--ease),transform .25s var(--out)}
+.pl-skip{width:0;margin-left:-6px}
+.pl-volwrap{width:0;margin-left:-6px}
+.player:hover .pl-skip,.player:focus-within .pl-skip,.player.expanded .pl-skip{width:28px;margin-left:0;opacity:1;pointer-events:auto}
+.player:hover .pl-volwrap,.player:focus-within .pl-volwrap,.player.expanded .pl-volwrap{width:30px;margin-left:0;opacity:1;pointer-events:auto}
+@media(hover:none){.player{width:min(252px,calc(100vw - 24px))}.pl-skip{width:28px;margin-left:0;opacity:1;pointer-events:auto}}
 </style>
 </head>
 <body>
@@ -481,7 +501,7 @@ body.playing .o2{animation-delay:-9s}
   <div class="pl-fx"></div>
   <div class="pl-row">
     <button class="pl-open" id="music-open" aria-label="Open playlist" aria-expanded="false">
-      <span class="pl-art"><i class="pl-disc"></i><span>TN</span><i class="eq"><b></b><b></b><b></b><b></b></i></span>
+      <span class="pl-art"><i class="pl-disc"></i><span class="sp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M5.5 9c4.5-1.3 9.8-.8 13.1 1.2M6.3 12.2c3.7-1 8-.6 11 1M7.1 15.2c3-.8 6.3-.4 8.7.9" fill="none" stroke="#0b0714" stroke-width="1.7" stroke-linecap="round"/></svg></span><i class="eq"><b></b><b></b><b></b><b></b></i></span>
       <span class="pl-meta"><strong id="music-title">Aint My Style</strong><small id="music-artist">whereami</small></span>
     </button>
     <div class="pl-volwrap">
@@ -664,10 +684,11 @@ const staff=rows(CFG.staff),tiers=CFG.tiers.split(',').map(t=>t.split('|'));
 
 /* statement: prima frase dell'ultimo paragrafo bio, parole che si accendono con lo scroll */
 const stText=(CFG.bio[CFG.bio.length-1].match(/^.*?[.!?](?=\s|$)/)||[CFG.bio[0]])[0];
-$('stm').innerHTML=stText.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ');
-const sw=[...document.querySelectorAll('#stm .w')];
-function stmScroll(){const r=$('stm').getBoundingClientRect(),p=clamp((innerHeight*.82-r.top)/(r.height+innerHeight*.35));
-  sw.forEach((w,i)=>w.style.setProperty('--o',(.16+.84*clamp(p*sw.length*1.25-i+.5)).toFixed(2)))}
+const toks=stText.split(' '),hl=new Set();
+[['SS','scene'],['Red','Lotus']].forEach(ph=>{for(let i=0;i<=toks.length-ph.length;i++)if(ph.every((w,k)=>toks[i+k].replace(/[^\w]/g,'')===w))ph.forEach((_,k)=>hl.add(i+k))});
+$('stm').innerHTML=toks.map((w,i)=>`<span class="wm${hl.has(i)?' hl':''}"><span class="wi" style="--i:${i}">${w}</span></span>`).join('');
+function stmScroll(){}
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}}),{threshold:.35}).observe($('stm'));
 
 /* stats ricavate dai tuoi dati */
 const yrs=new Date().getFullYear()-2022;
