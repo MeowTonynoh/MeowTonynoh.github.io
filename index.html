@@ -530,14 +530,14 @@ body.playing .o2{animation-delay:-9s}
 @media(max-width:420px){.eq{display:none}}
 
 /* ===== MY PROJECTS ===== */
-.pjh{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:-44px 0 18px}
+.pjh{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:0 0 18px}
 .pst{font:12px var(--mono);color:#e3c26a;padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:rgba(227,194,106,.07)}
 .pst:empty{display:none}
 .gbtn{font:12px var(--mono);padding:8px 15px;border-radius:99px;border:1px solid var(--line2);color:var(--bright);transition:background .25s,color .25s}
 .gbtn:hover{background:var(--bright);color:#0a0612}
 .pcg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
 @media(max-width:980px){.pcg{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:620px){.pcg{grid-template-columns:1fr}.pjh{margin-top:0;justify-content:flex-start}}
+@media(max-width:620px){.pcg{grid-template-columns:1fr}.pjh{justify-content:flex-start}}
 .pc{position:relative;display:flex;flex-direction:column;gap:12px;text-align:left;padding:22px;border-radius:18px;background:linear-gradient(145deg,rgba(26,17,44,.92),rgba(10,7,18,.92));border:1px solid var(--line);color:var(--txt);cursor:pointer;overflow:hidden;transition:transform .35s var(--out),border-color .3s,box-shadow .35s}
 .pc:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(240px 130px at var(--mx,50%) var(--my,0%),rgba(167,110,255,.17),transparent 70%);opacity:0;transition:opacity .3s}
 .pc:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 20px 44px -20px rgba(109,51,255,.6)}
@@ -569,6 +569,7 @@ body.playing .o2{animation-delay:-9s}
 .pc.wide:before{display:none}
 .wh{display:flex;align-items:center;gap:10px}
 .wh span{font:600 10.5px var(--mono);letter-spacing:.18em;color:var(--dim)}
+.gb::-webkit-scrollbar{width:8px}.gb::-webkit-scrollbar-thumb{background:#4b2f8a;border-radius:8px}.gb::-webkit-scrollbar-track{background:transparent}
 .gm .hs{display:flex;align-items:center;gap:10px}
 .sb{display:grid;gap:8px;margin-top:2px}
 .sr{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;background:rgba(167,110,255,.06);border:1px solid var(--line)}
@@ -578,7 +579,7 @@ body.playing .o2{animation-delay:-9s}
 .sr button,.sr a{font:11px var(--mono);padding:7px 12px;border-radius:99px;border:1px solid var(--line2);background:none;color:var(--bright);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
 .sr button:hover,.sr a:hover{background:var(--bright);color:#0a0612}
 @media(max-width:560px){.sr{flex-wrap:wrap}.sr>div{flex-basis:100%}}
-.gm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(5,3,10,.72);backdrop-filter:blur(8px);animation:gmIn .25s ease}
+.gm{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(5,3,10,.72);backdrop-filter:blur(8px);animation:gmIn .25s ease}
 .gm.out{opacity:0;transition:opacity .22s}
 .gp{width:100%;max-width:860px;height:min(80vh,640px);display:flex;flex-direction:column;border-radius:20px;background:#0d0817;border:1px solid var(--line2);box-shadow:0 30px 90px -20px #000;overflow:hidden;animation:gpIn .35s var(--out)}
 @keyframes gmIn{from{opacity:0}}
@@ -592,7 +593,7 @@ body.playing .o2{animation-delay:-9s}
 .gt{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--line)}
 .gt button{font:12px var(--mono);padding:9px 14px;border:0;border-bottom:2px solid transparent;background:none;color:var(--dim);cursor:pointer}
 .gt button.on{color:var(--bright);border-color:var(--p)}
-.gb{flex:1;min-height:0;overflow:auto;padding:22px 24px;font-size:14px;line-height:1.65}
+.gb{scrollbar-width:thin;scrollbar-color:#5b3aa8 transparent;flex:1;min-height:0;overflow:auto;padding:22px 24px;font-size:14px;line-height:1.65}
 .gb h1,.gb h2,.gb h3{color:var(--bright);font-family:'Space Grotesk';margin:1.3em 0 .5em;letter-spacing:-.01em;text-transform:none;display:block;font-size:1.15em;min-height:0}
 .gb h1{font-size:1.45em;margin-top:0}
 .gb p{margin:.6em 0}.gb ul{margin:.5em 0 .5em 1.2em}.gb li{margin:.25em 0}
@@ -610,25 +611,66 @@ body.playing .o2{animation-delay:-9s}
 .gx{display:flex;padding:12px 20px;border-top:1px solid var(--line)}
 .gx a{margin-left:auto;font:12px var(--mono);padding:9px 16px;border-radius:99px;border:1px solid var(--line2);color:var(--bright);transition:background .2s,color .2s}
 .gx a:hover{background:var(--bright);color:#0a0612}
+
+/* inline imgur proofs */
+.px{grid-column:1/-1;display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;transition:grid-template-rows .5s var(--out),opacity .35s ease,margin-top .5s var(--out);cursor:default}
+.px.open{grid-template-rows:1fr;opacity:1;margin-top:16px}
+.pxi{min-height:0;overflow:hidden}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding-bottom:2px}
+.gal img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line);background:#0b0714;cursor:zoom-in;transition:border-color .3s}
+.gal img:hover{border-color:var(--line2)}
+.gal img.big{grid-column:1/-1;cursor:zoom-out}
+.sk{height:150px;border-radius:14px;background:linear-gradient(100deg,rgba(167,110,255,.05) 30%,rgba(167,110,255,.15) 50%,rgba(167,110,255,.05) 70%);background-size:200% 100%;animation:skm 1.2s linear infinite}
+@keyframes skm{to{background-position:-200% 0}}
+.fw{position:relative;height:min(58vh,420px);overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#0b0714}
+.fw iframe{position:absolute;left:0;top:-62px;width:calc(100% + 18px);height:calc(100% + 80px);border:0}
+.po{display:inline-block;margin-top:10px;font:12px var(--mono);color:var(--dim);transition:color .25s}
+.po:hover{color:var(--p)}
+#staff .row{cursor:pointer;row-gap:0}
+@media(max-width:700px){#staff .row{row-gap:4px}}
+#staff .row .ra i{display:inline-block;font-style:normal;transition:transform .4s var(--out)}
+#staff .row:hover .ra{color:var(--p)}
+#staff .row.open .ra{color:var(--p)}
+#staff .row.open .ra i{transform:rotate(180deg)}
+#staff .row.open{transform:none!important;background:rgba(154,100,255,.055)}
+#staff .row.open:hover{padding-left:0;padding-right:0}
+.chips.sm button{font:12px var(--mono);padding:5px 13px;border-radius:99px;border:1px solid var(--line);background:none;color:inherit;cursor:pointer;transition:all .3s}
+.chips.sm button:hover,.chips.sm button.on{color:#fff;border-color:var(--p);background:rgba(167,110,255,.15)}
+
+/* ===== crisp rings: SVG strokes instead of CSS borders (CSS borders look dashed on fractional-DPR screens) ===== */
+#cur-ring{border:0;background:transparent}
+#cur-ring svg{display:block;width:100%;height:100%;overflow:visible;shape-rendering:geometricPrecision}
+#cur-ring circle{fill:none;stroke:rgba(210,176,255,.6);stroke-width:1.5;vector-effect:non-scaling-stroke;transition:stroke .2s}
+html.cc.cur-link #cur-ring{background:rgba(167,110,255,.12)}
+html.cc.cur-link #cur-ring circle{stroke:rgba(210,176,255,.95)}
+html.cc.cur-down #cur-ring{background:rgba(167,110,255,.22)}
+#gate .g-ring{border:0;overflow:visible;will-change:auto}
+#gate .g-ring:before{content:none;animation:none}
+#gate .g-ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;shape-rendering:geometricPrecision}
+#gate .gr-base,#gate .gr-wave{fill:none;stroke-width:1.5;vector-effect:non-scaling-stroke}
+#gate .gr-base{stroke:rgba(210,176,255,.8)}
+#gate .gr-wave{stroke:rgba(210,176,255,.55);opacity:0;transform-box:fill-box;transform-origin:center;animation:gateWave 2.4s cubic-bezier(.22,.61,.36,1) infinite}
+/* tracks that failed to load stay visible but dimmed */
+.track.broken{opacity:.45}.track.broken b{text-decoration:line-through}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="sp-logo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1ed760"/><g fill="none" stroke="#0a0710" stroke-linecap="round"><path d="M5.2 8.9c4.7-1.4 10.3-1 14 1.4" stroke-width="2.2"/><path d="M6 12.4c3.9-1.1 8.5-.7 11.6 1.2" stroke-width="1.9"/><path d="M6.8 15.7c3-.8 6-.4 8.3 1" stroke-width="1.6"/></g></symbol></svg>
 <canvas id="fx"></canvas>
-<div class="orb o1"></div><div class="orb o2"></div><div id="cur-ring"></div><div id="cur-dot"></div>
+<div class="orb o1"></div><div class="orb o2"></div><div id="cur-ring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="49"/></svg></div><div id="cur-dot"></div>
 
 <div id="intro">
   <canvas id="st"></canvas>
   <div class="c"><div class="it" id="it"></div><div class="iw mono" id="iw"></div></div>
   <div class="bar"><i id="bar"></i></div>
   <button id="skip">SKIP</button>
-  <div id="gate"><span class="g-ring"></span><b>CLICK TO ENTER</b></div>
+  <div id="gate"><span class="g-ring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="gr-base" cx="50" cy="50" r="49"/><circle class="gr-wave" cx="50" cy="50" r="49"/></svg></span><b>CLICK TO ENTER</b></div>
 </div>
 
 <header id="hd">
   <a class="logo brandmark tn-logo" href="#top" aria-label="tonynoh is the way — back to top"><span class="tn-mark"><img src="hero.jpg" alt="Tonynoh" width="40" height="40" onerror="this.replaceWith(Object.assign(document.createElement('b'),{textContent:'TN'}))"></span><span class="tn-text">tonynoh <em>is the way</em></span></a>
   <div class="pill"><i class="ind" id="ind"></i>
-    <a href="#about" data-s="about"><b>01</b>About</a><a href="#tools" data-s="tools"><b>02</b><span class="lg">Tools &amp; Knowledge</span><span class="sh">Tools</span></a><a href="#staff" data-s="staff"><b>03</b>Staff</a><a href="#socials" data-s="socials"><b>04</b>My Socials</a>
+    <a href="#about" data-s="about"><b>01</b>About</a><a href="#tools" data-s="tools"><b>02</b><span class="lg">Projects</span><span class="sh">Projects</span></a><a href="#staff" data-s="staff"><b>03</b>Staff</a><a href="#socials" data-s="socials"><b>04</b>My Socials</a>
   </div>
   <div class="hr"><a class="cta" id="cta" target="_blank" rel="noopener">Discord <b>↗</b></a></div>
 </header>
@@ -684,9 +726,8 @@ body.playing .o2{animation-delay:-9s}
     </div>
   </section>
   <section id="tools" class="reveal">
-    <h2>Tools &amp; Knowledge</h2>
-    <div class="sub" style="margin-top:0">Knowledge</div><div class="grid know" id="know-grid"></div>
-    <div class="sub">My Projects</div><div class="pj" id="proj-grid"></div>
+    <h2>Projects</h2>
+    <div class="pj" id="proj-grid"></div>
   </section>
   <section id="staff"><h2 id="staff-title"></h2>
     <input class="q" id="q" placeholder="search communities…" autocomplete="off" spellcheck="false" aria-label="Search staff experience">
@@ -719,6 +760,8 @@ const CFG={
   tools:[['MEMORY','Volatility','RAM dump analysis'],['DISK','Autopsy','Disk image forensics'],['ACQUISITION','FTK Imager','Imaging and mounting'],['ARTIFACTS','Zimmerman Tools','Registry, MFT, Prefetch'],['PROCESS','Process Hacker','Processes, handles, modules'],['NETWORK','Wireshark','Traffic analysis']],
   knowledge:[['DFIR','Digital Forensics & Incident Response','Describe what you analyze, the cases you have worked on and your workflow.'],['PC CHECK','PC Checking','Describe your checking method, what you look for and for which communities.']],
   // PVP Tiers Network sub-tiers: name|proof
+  // free imgur Client-ID (api.imgur.com/oauth2/addclient, anonymous usage): shows proofs as a clean gallery instead of the imgur embed
+  imgurClientId:'',
   tiers:'UHC|r7pqYgn,Axe|0f5cMoj,Crystal|AT2hfxf,Potion|F7GZK7Z,Sword|JDsLqrN,SMP|QAte1CP,Nethpot|ymP3UCm',
   // staff: community|role|proof (imgur album id)
   staff:`Elysian Tierlist|NETWORK OWNER & HEAD SS|kMki7eQ
@@ -732,7 +775,7 @@ PhaseMC|SRMOD + HEAD SS|wIB7fcc
 Vikur|SS VERIFIED|P6FRA2N
 Solitary Tierlist|SS VERIFIED|liL8bq3
 Crystal Ranked|SS VERIFIED|qgZT7LG
-Nova Tiers|HEAD SS|CV4yxtp
+Crystal Club|HEAD SS|Cd0doq3
 Mars Tierlist|SS MANAGER|oAUPPG1
 Ryzon Tierlist|SS MANAGER|Qpdy1sI
 ItaPrac|MOD + SS MANAGER|kgLjii6
@@ -798,12 +841,31 @@ Spearmacefun|SCREENSHARER|hgDIJON
 Stat Tierlist|SCREENSHARE MANAGER|JDklq5d
 galaxybox.org|SCREENSHARER|RVaySWV
 Orbit Tiers Network|SS TEAM|7bJY6v7
-Gang Tiers|SCREENSHARER|yYolkce`
+Gang Tiers|SCREENSHARER|yYolkce
+European Tiers|HEAD SS|cfnGHIV
+Iron Vanilla PvP Community|SCREENSHARER|P5CLtId
+Kairo Tiers|FORENSIC MANAGER|GsfvuGa
+Arise Tierlist|SR. FORENSIC|mRvvLAG
+TitanFFA|SS OVERSEER + HIGH STAFF|xz0HCL8
+Mace Legion|SCREENSHARER|iMHzjKM
+Solar Tierlist|HEAD SSER|Lq7Ja3r
+Moonhex Tiers|FORENSIC EXPERT|IajVcX0
+Combat Tierlist|HEAD SSER|VF1mfpX
+TR NethTier PvP Tierlist|SCREENSHARER|9PLrbbz
+Nexus SMP|SSER|Znzay61
+Screenshare Syndicate|JUNIOR MANAGEMENT|YvpUqMa
+SMP Prac|SCREENSHARER|8mSGumB`
 };
 
 /* ============ HELPERS ============ */
 const $=id=>document.getElementById(id);
 const proof=id=>`https://imgur.com/a/${id}`;
+const frame=id=>`<div class="fw"><iframe src="https://imgur.com/a/${id}/embed?pub=true&w=540" loading="lazy" allowfullscreen title="Proof"></iframe></div><a class="po" href="${proof(id)}" target="_blank" rel="noopener">Open on imgur ↗</a>`;
+const IMG=new Map();
+const albumImgs=async id=>{if(IMG.has(id))return IMG.get(id);if(!CFG.imgurClientId)throw 0;
+ const r=await fetch('https://api.imgur.com/3/album/'+id,{headers:{Authorization:'Client-ID '+CFG.imgurClientId}});if(!r.ok)throw 0;
+ const j=await r.json(),l=((j.data&&j.data.images)||[]).filter(i=>!i.type||i.type.startsWith('image')).map(i=>i.link);if(!l.length)throw 0;IMG.set(id,l);return l};
+const gal=(l,id)=>`<div class="gal">${l.map(u=>`<img src="${u.replace(/"/g,'')}" loading="lazy" alt="Proof">`).join('')}</div><a class="po" href="${proof(id)}" target="_blank" rel="noopener">Open on imgur ↗</a>`;
 const rows=s=>s.split('\n').map(r=>r.split('|'));
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 
@@ -846,19 +908,18 @@ $('idc').innerHTML=`<div class="idt"><span>ID</span><span>${CFG.city.toUpperCase
 <dl class="idr"><div><dt>Age</dt><dd>${CFG.age}</dd></div><div><dt>Location</dt><dd>${CFG.city}</dd></div><div><dt>Since</dt><dd>2022</dd></div></dl>`;
 
 /* tools + knowledge */
-$('know-grid').innerHTML=CFG.knowledge.map(([k,h,p])=>`<div class="card"><span class="k">${k}</span><h3>${h}</h3><p>${p}</p></div>`).join('');
 
 /* my projects */
 (()=>{
 const U='MeowTonynoh',GH='<svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>';
 const P=[
-['MeowClientFucker','Cheat client detection through Javaw RAM scanning and DNS cache analysis, plus generic module detection that works independently from the client.',['RAM scan','DNS cache','Javaw']],
-['MeowDoomsdayFucker','Detects the Doomsday client through RAM memory scanning and Windows system file analysis, with an integrated JAR parser.',['RAM scan','System files','JAR parser']],
-['MeowNovowareFucker','Detects the Novoware client through memory scanning and NTFS journal analysis.',['RAM scan','NTFS journal']],
+['MeowClientFucker','Javaw scanner that detects cheat clients through RAM memory scanning, plus DNS cache analysis and generic module detection that works independently from the client.',['Javaw scan','DNS cache','RAM scan']],
+['MeowDoomsdayFucker','Javaw scan that detects the Doomsday client through RAM memory scanning, with Windows system file analysis and an integrated JAR parser.',['Javaw scan','System files','JAR parser']],
+['MeowNovowareFucker','Javaw scan that detects the Novoware client through RAM memory scanning, plus NTFS journal analysis.',['Javaw scan','NTFS journal']],
 ['MeowModAnalyzer','Scans a mods folder, hashes every JAR and checks it against Modrinth to flag potential cheat clients.',['PowerShell','SHA1','Modrinth API']],
 ['MeowResolver','Windows forensic tool that finds and removes bypass techniques and anti-forensic tampering in registry, event logs and file system.',['Registry','Event logs','Admin']],
 ['MeowImportsChecker','Scans files for client signatures, strings, PE imports, obfuscation and injection artifacts, with VirusTotal lookup. 100% local, read-only.',['PE imports','Strings','VirusTotal']],
-['ShadowClicker','Lightweight clicker built on native Windows input APIs, made to run fileless for testing.',['SendInput','Fileless'] ]
+['ShadowClicker','A simple .ps1 clicker runnable as a fileless.',['PowerShell','Fileless']]
 ];
 const SUB=[
 ['JVM-Inspector.ps1','Analyzes java/javaw launch arguments and JVM abuse.'],
@@ -868,7 +929,8 @@ const e=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"
 const g=$('proj-grid'),FEAT='MeowClientFucker',LIVE={},REL={},KEY='tn-gh-v2';
 const LC={'C#':'#a77bff','PowerShell':'#4fa3ff','C++':'#ff7ab8','C':'#9aa4b8','Python':'#4cc38a','JavaScript':'#f1c94b','Batchfile':'#8bd450'};
 const lp=l=>l?`<span class="lp"><i style="background:${LC[l]||'#9a8fb8'}"></i>${e(l)}</span>`:'';
-const stat=n=>{const d=LIVE[n];return d?lp(d.lang)+`<span class="st">★ ${d.stars}</span>`+(d.forks?`<span>⑂ ${d.forks}</span>`:''):''};
+const DEF={'Tonynoh-PS1':'PowerShell'};
+const stat=n=>{const d=LIVE[n];if(!d)return lp(DEF[n]);return d?lp(d.lang||DEF[n])+`<span class="st">★ ${d.stars}</span>`+(d.forks?`<span>⑂ ${d.forks}</span>`:''):''};
 const CH='<svg class="ch" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>';
 const tags=t=>`<div class="tg">${t.map(x=>`<i>${x}</i>`).join('')}</div>`;
 const card=([n,d,t])=>`<div class="pc" data-repo="${n}" role="button" tabindex="0"><div class="pn"><b>${n}</b>${CH}</div><p>${d}</p>${tags(t)}<div class="pf"><span class="sl" data-st="${n}"></span><span data-dl="${n}" style="margin-left:auto"></span></div></div>`;
@@ -876,7 +938,7 @@ const F=P.find(p=>p[0]===FEAT)||P[0],REST=P.filter(p=>p!==F);
 g.innerHTML=`<div class="pjh"><span class="pst" id="pst"></span><a class="gbtn" href="https://github.com/${U}" target="_blank" rel="noopener">GitHub ↗</a></div>`
 +`<div class="pc ft" data-repo="${F[0]}" role="button" tabindex="0"><div class="fm"><span class="pill2">MAIN PROJECT</span><div class="pn"><b>${F[0]}</b></div><p>${F[1]}</p>${tags(F[2])}</div><div class="fr"><span class="sl" data-st="${F[0]}"></span><span data-dl="${F[0]}"></span>${CH}</div></div>`
 +`<div class="pcg">${REST.map(card).join('')}</div>`
-+`<div class="pc wide"><div class="wh"><span>COLLECTION</span></div><div class="pn"><b>Tonynoh-PS1</b></div><p>A collection of PowerShell scripts for screenshare checks, runnable straight from PowerShell.</p><div class="sb">${SUB.map(([f,d])=>`<div class="sr"><div><b>${f}</b><span>${d}</span></div><button data-cmd="${f}">Copy command</button><a href="https://github.com/${U}/Tonynoh-PS1/blob/main/${f}" target="_blank" rel="noopener">View</a></div>`).join('')}</div></div>`;
++`<div class="pc wide"><div class="wh"><span>COLLECTION</span></div><div class="pn"><b>Tonynoh-PS1</b><span class="sl" data-st="Tonynoh-PS1">${stat('Tonynoh-PS1')}</span></div><p>A collection of PowerShell scripts for screenshare checks, runnable straight from PowerShell.</p><div class="sb">${SUB.map(([f,d])=>`<div class="sr"><div><b>${f}</b><span>${d}</span></div><button data-cmd="${f}">Copy command</button><a href="https://github.com/${U}/Tonynoh-PS1/blob/main/${f}" target="_blank" rel="noopener">View</a></div>`).join('')}</div></div>`;
 g.addEventListener('pointermove',ev=>{const c=ev.target.closest('.pc');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',ev.clientX-r.left+'px');c.style.setProperty('--my',ev.clientY-r.top+'px')}});
 g.addEventListener('click',ev=>{
  if(ev.target.closest('a.dl'))return;
@@ -951,11 +1013,24 @@ function open(n){
 
 /* staff */
 $('staff-title').textContent=`Staff · ${staff.length+1} communities`;
-$('pvp').innerHTML=`<div class="card pvp wide"><h3>PVP Tiers Network</h3><span class="role">PVP TIERIST</span><div class="chips sm">${tiers.map(([n,p])=>`<a href="${proof(p)}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div></div>`;
+$('pvp').innerHTML=`<div class="card pvp wide"><h3>PVP Tiers Network</h3><span class="role">PVP TIERIST</span><div class="chips sm">${tiers.map(([n,p])=>`<button type="button" class="tc" data-p="${p}">${n} ▾</button>`).join('')}</div><div class="px" id="pvp-px"><div class="pxi"></div></div></div>`;
 $('q').addEventListener('input',e=>{const v=e.target.value.trim().toLowerCase();let n=0;
   document.querySelectorAll('#staff-grid .row').forEach(r=>{const h=!!v&&!r.dataset.k.includes(v);r.hidden=h;if(!h){n++;r.classList.add('in')}});
   const pv=$('pvp').firstElementChild,pm=!v||pv.textContent.toLowerCase().includes(v);pv.hidden=!pm;$('qe').hidden=n>0||pm});
-$('staff-grid').innerHTML=staff.map(([n,r,p])=>`<a class="row" data-k="${(n+' '+r).toLowerCase()}" href="${proof(p)}" target="_blank" rel="noopener"><span class="rn">${n}</span><span class="rr">${r}</span><span class="ra">proof ↗</span></a>`).join('');
+$('staff-grid').innerHTML=staff.map(([n,r,p])=>`<div class="row" role="button" tabindex="0" aria-expanded="false" data-k="${(n+' '+r).toLowerCase()}" data-p="${p}"><span class="rn">${n}</span><span class="rr">${r}</span><span class="ra">proof <i>▾</i></span><div class="px"><div class="pxi"></div></div></div>`).join('');
+const openPx=(box,id)=>{const inner=box.firstElementChild;
+ if(box.dataset.id!==id){box.dataset.id=id;inner.innerHTML='<div class="sk"></div>';
+  albumImgs(id).then(l=>{if(box.dataset.id===id)inner.innerHTML=gal(l,id)},()=>{if(box.dataset.id===id)inner.innerHTML=frame(id)})}
+ box.classList.add('open')};
+document.addEventListener('click',ev=>{const i=ev.target.closest('.gal img');if(i)i.classList.toggle('big')});
+$('staff-grid').addEventListener('click',ev=>{if(ev.target.closest('.px'))return;const r=ev.target.closest('.row');if(!r)return;const will=!r.classList.contains('open');
+ document.querySelectorAll('#staff-grid .row.open').forEach(x=>{x.classList.remove('open');x.setAttribute('aria-expanded','false');x.querySelector('.px').classList.remove('open')});
+ if(will){r.classList.add('open');r.setAttribute('aria-expanded','true');openPx(r.querySelector('.px'),r.dataset.p);
+  setTimeout(()=>{const t=r.getBoundingClientRect().top;if(t<90||t>innerHeight*.55)scrollBy({top:t-110,behavior:'smooth'})},520)}});
+$('staff-grid').addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target.classList.contains('row')){ev.preventDefault();ev.target.click()}});
+$('pvp').addEventListener('click',ev=>{const c=ev.target.closest('.tc');if(!c)return;const b=$('pvp-px'),same=c.classList.contains('on');
+ document.querySelectorAll('#pvp .tc').forEach(x=>x.classList.remove('on'));
+ if(same){b.classList.remove('open');return}c.classList.add('on');openPx(b,c.dataset.p)});
 $('soc').innerHTML=CFG.socials.map(([n,u,d])=>`<a class="link" href="${u}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="${d}"/></svg><b>${n}</b><em>${u.replace(/^https?:\/\/(www\.)?/,'').slice(0,34)}</em><span class="ar">↗</span></a>`).join('');
 
 /* ============ CURSOR GLOW + PARTICLES + PARALLAX WORDMARK ============ */
@@ -1144,12 +1219,16 @@ function finish(){
  const tracks=[
   {title:'Aint My Style',artist:'whereami',file:'aint my style - whereami.mp3'},
   {title:'InWAVES',artist:'Vat6ré',file:'InWAVES - Vat6ré.mp3'},
-  {title:'16',artist:'starkura, PureSnow',file:'16 - starkura PureSnow.mp3'},
-  {title:'Already (Bass Boosted)',artist:'Kodak Black',file:'Already - Kodak Black.mp3'},
-  {title:'Фруктовый 1.0',artist:'ЭЛЕВЕН ЭЙТ',file:'Fruktovyi 1.0 - Eleven Eight.mp3'}
+  {title:'16',artist:'starkura, PureSnow',file:'16 - starkura PureSnow.mp3',alt:['16.mp3']},
+  {title:'Already (Bass Boosted)',artist:'Kodak Black',file:'Already - Kodak Black.mp3',alt:['Kodak-Black-SnapYT_App.mp3','Kodak Black - Already (Bass Boosted).mp3']},
+  {title:'Фруктовый 1.0',artist:'ЭЛЕВЕН ЭЙТ',file:'Fruktovyi 1.0 - Eleven Eight.mp3',alt:['Фруктовый-10-SnapYT_App.mp3','Фруктовый 1.0 — ЭЛЕВЕН ЭЙТ.mp3']}
 ];
- // URL-safe candidates (spaces and accents encoded; both Unicode forms of "é" are tried)
- const urlsOf=f=>[...new Set([f.normalize('NFC'),f.normalize('NFD')])].map(n=>encodeURIComponent(n).replace(/%2F/g,'/'));
+ // URL-safe candidates: exact name, lowercase (case-sensitive hosts), spaces as "_" or "-", plus both Unicode forms of "é"
+ const urlsOf=t=>{
+  const names=[t.file,...(t.alt||[])].flatMap(f=>{const b=f.normalize('NFC');return [b,b.toLowerCase(),b.replace(/ /g,'_'),b.replace(/ /g,'-')]});
+  return [...new Set(names.flatMap(n=>[n.normalize('NFC'),n.normalize('NFD')]))].map(n=>encodeURIComponent(n).replace(/%2F/g,'/'));
+ };
+ const broken=new Set();let failStreak=0,wd=0,wdRetried=false;
  let current=0,cand=0,wantPlay=false,userPaused=false,dragging=false,raf=0,lastVol=.3;
  const fmt=s=>Number.isFinite(s)?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'0:00';
  const seek=g('music-seek'),playBtn=g('music-play'),status=g('music-status'),fill=g('music-line').firstElementChild;
@@ -1175,21 +1254,55 @@ function finish(){
  function safePlay(){
   const p=audio.play();
   if(p&&p.catch)p.catch(err=>{if(err&&err.name==='NotAllowedError'){dock.classList.remove('playing');document.body.classList.remove('playing');dock.classList.add('hint');setStatus()}});
+  armWatchdog();
+ }
+ // watchdog: if a track never gets enough data to play, reload it once, then mark it as broken and move on
+ const clearWd=()=>{clearTimeout(wd);wd=0};
+ function armWatchdog(ms=12000){
+  clearWd();
+  if(!wantPlay)return;
+  wd=setTimeout(()=>{
+   if(audio.readyState>=3||dock.classList.contains('hint'))return; // loaded fine, or just waiting for the first click
+   if(!wdRetried){
+    wdRetried=true;const t=audio.currentTime;
+    audio.load();
+    audio.addEventListener('loadedmetadata',()=>{if(t>1)audio.currentTime=t},{once:true});
+    safePlay();armWatchdog(15000);
+   }else fail();
+  },ms);
+ }
+ function fail(){
+  clearWd();
+  const t=tracks[current];
+  broken.add(current);
+  if(rows[current]){rows[current].classList.add('broken');rows[current].title='Missing or unplayable: '+t.file}
+  dock.classList.remove('playing','hint');dock.classList.add('error');document.body.classList.remove('playing');
+  swap(g('music-artist'),t.file);setStatus();ready();
+  failStreak++;
+  // keep the music going: jump to the next track that did not fail (stops when every track failed)
+  if(wantPlay&&failStreak<tracks.length)setTimeout(()=>{if(dock.classList.contains('error'))step(1,true)},1200);
+ }
+ function step(dir,auto){
+  if(!auto)failStreak=0;
+  let n=current;
+  for(let k=0;k<tracks.length;k++){n=(n+dir+tracks.length)%tracks.length;if(!broken.has(n))break}
+  load(n,true);
  }
  function setSrc(){
-  const list=urlsOf(tracks[current].file);
+  const list=urlsOf(tracks[current]);
   audio.src=list[Math.min(cand,list.length-1)];
   if(wantPlay)safePlay();
  }
  function load(i,autoplay=false){
-  current=(i+tracks.length)%tracks.length;cand=0;wantPlay=autoplay;
+  current=(i+tracks.length)%tracks.length;cand=0;wantPlay=autoplay;wdRetried=false;
+  broken.delete(current);if(rows[current]){rows[current].classList.remove('broken');rows[current].removeAttribute('title')}
   dock.classList.remove('error');
   seek.value=0;setPct(seek,0,1);setFill(0);g('music-current').textContent='0:00';g('music-duration').textContent='0:00';
   setMeta();setSrc();setStatus();
  }
  function toggle(){
   playBtn.classList.remove('rip');void playBtn.offsetWidth;playBtn.classList.add('rip');
-  if(audio.paused){userPaused=false;wantPlay=true;safePlay()}else{userPaused=true;wantPlay=false;audio.pause()}
+  if(audio.paused){userPaused=false;wantPlay=true;safePlay()}else{userPaused=true;wantPlay=false;audio.pause();clearWd()}
  }
  // volume: every slider and mute button is kept in sync
  function syncVol(){
@@ -1223,9 +1336,9 @@ function finish(){
  document.addEventListener('pointerdown',e=>{
   if(dock.classList.contains('expanded')&&!dock.contains(e.target)){dock.classList.remove('expanded');g('music-open').setAttribute('aria-expanded','false')}
  });
- g('music-prev').addEventListener('click',()=>{if(audio.currentTime>3){audio.currentTime=0}else load(current-1,true)});
- g('music-next').addEventListener('click',()=>load(current+1,true));
- rows.forEach(el=>el.addEventListener('click',()=>{userPaused=false;load(Number(el.dataset.track),true)}));
+ g('music-prev').addEventListener('click',()=>{if(audio.currentTime>3){audio.currentTime=0}else step(-1)});
+ g('music-next').addEventListener('click',()=>step(1));
+ rows.forEach(el=>el.addEventListener('click',()=>{userPaused=false;failStreak=0;load(Number(el.dataset.track),true)}));
  vols.forEach(el=>el.addEventListener('input',e=>setVolume(Number(e.target.value))));
  mutes.forEach(el=>el.addEventListener('click',toggleMute));
  // mouse wheel over the player changes the volume
@@ -1239,6 +1352,10 @@ function finish(){
 
  audio.volume=.3;syncVol();
  audio.addEventListener('playing',ready,{once:true});
+ audio.addEventListener('playing',()=>{clearWd();wdRetried=false;failStreak=0});
+ audio.addEventListener('canplay',clearWd);
+ audio.addEventListener('waiting',()=>{if(wantPlay)armWatchdog(15000)});
+ audio.addEventListener('stalled',()=>{if(wantPlay&&audio.readyState<3)armWatchdog(15000)});
  audio.addEventListener('play',()=>{
   dock.classList.add('playing');dock.classList.remove('hint','error');document.body.classList.add('playing');
   if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';
@@ -1252,20 +1369,20 @@ function finish(){
  });
  audio.addEventListener('loadedmetadata',()=>{g('music-duration').textContent=fmt(audio.duration)});
  audio.addEventListener('durationchange',()=>{g('music-duration').textContent=fmt(audio.duration)});
- audio.addEventListener('ended',()=>load(current+1,true));
+ audio.addEventListener('ended',()=>step(1,true));
  audio.addEventListener('error',()=>{
-  // try the next URL variant, then give up and show which file is missing
-  if(cand+1<urlsOf(tracks[current].file).length){cand++;setSrc();return}
-  dock.classList.remove('playing','hint');dock.classList.add('error');document.body.classList.remove('playing');
-  swap(g('music-artist'),tracks[current].file);setStatus();ready();
+  if(!audio.getAttribute('src'))return;
+  // try the next URL variant, then give up on this track and skip to the next one
+  if(cand+1<urlsOf(tracks[current]).length){cand++;setSrc();return}
+  fail();
  });
 
  if('mediaSession' in navigator){
   const ms=navigator.mediaSession;
   ms.setActionHandler('play',()=>{userPaused=false;wantPlay=true;safePlay()});
   ms.setActionHandler('pause',()=>{userPaused=true;wantPlay=false;audio.pause()});
-  ms.setActionHandler('previoustrack',()=>load(current-1,true));
-  ms.setActionHandler('nexttrack',()=>load(current+1,true));
+  ms.setActionHandler('previoustrack',()=>step(-1));
+  ms.setActionHandler('nexttrack',()=>step(1));
  }
 
  load(0,false);
